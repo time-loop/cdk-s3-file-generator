@@ -2,7 +2,7 @@
   "name": "@time-loop/cdk-s3-file-generator",
   "repository": {
     "type": "git",
-    "url": "https://github.com/user/cdk-s3-file-generator.git"
+    "url": "https://github.com/time-loop/cdk-s3-file-generator.git"
   },
   "scripts": {
     "build": "npx projen build",
@@ -29,8 +29,8 @@
     "projen": "npx projen"
   },
   "author": {
-    "name": "user",
-    "email": "user@domain.com",
+    "name": "ClickUp",
+    "email": "devops@clickup.com",
     "organization": true
   },
   "devDependencies": {

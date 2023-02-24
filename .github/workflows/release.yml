@@ -78,10 +78,6 @@ jobs:
       - name: Restore build artifact permissions
         run: cd dist && setfacl --restore=permissions-backup.acl
         continue-on-error: true
-      - name: Prepare Repository
-        run: mv dist .repo
-      - name: Collect GitHub Metadata
-        run: mv .repo/dist dist
       - name: Release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -108,56 +104,12 @@ jobs:
       - name: Restore build artifact permissions
         run: cd dist && setfacl --restore=permissions-backup.acl
         continue-on-error: true
-      - name: GitHub Packages authorization
-        if: ${{ github.job != 'release_npm' }}
-        run: |-
-          cat > .npmrc <<EOF
-          //npm.pkg.github.com/:_authToken=${{ secrets.ALL_PACKAGE_READ_TOKEN }}
-          @time-loop:registry=https://npm.pkg.github.com/
-          EOF
-      - name: Make cdk-ecr-deployment sane
-        run: export FORCE_PREBUILT_LAMBDA=1
-      - name: Prepare Repository
-        run: mv dist .repo
-      - name: Install Dependencies
-        run: cd .repo && yarn install --check-files --frozen-lockfile
-      - name: Create js artifact
-        run: cd .repo && npx projen package:js
-      - name: Collect js Artifact
-        run: mv .repo/dist dist
       - name: Release
         env:
           NPM_DIST_TAG: latest
           NPM_REGISTRY: npm.pkg.github.com
           NPM_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: npx -p publib@latest publib-npm
-  send_release_event:
-    name: Send Release Event
-    needs: release
-    runs-on: ubuntu-latest
-    permissions:
-      contents: read
-    env:
-      CI: "true"
-    if: needs.release.outputs.latest_commit == github.sha
-    steps:
-      - name: Download build artifacts
-        uses: actions/download-artifact@v3
-        with:
-          name: build-artifact
-          path: dist
-      - name: Get version
-        id: event_metadata
-        run: echo "release_tag=$(cat dist/releasetag.txt)" >> $GITHUB_OUTPUT
-      - name: Send Datadog event
-        uses: Glennmen/datadog-event-action@fb18624879901f1ff0c3c7e1e102179793bfe948
-        with:
-          datadog_api_key: ${{ secrets.DD_PROJEN_RELEASE_API_KEY }}
-          datadog_us: true
-          event_title: Released @time-loop/cdk-s3-file-generator version ${{ steps.event_metadata.outputs.release_tag }}
-          event_text: Released @time-loop/cdk-s3-file-generator version ${{ steps.event_metadata.outputs.release_tag }}
-          event_priority: normal
-          event_tags: "['project:@time-loop/cdk-s3-file-generator','release:true','version:${{ steps.event_metadata.outputs.release_tag }}','actor:${{ github.actor }}']"
   send_release_event_to_slack:
     name: Send Release Alert to Slack
     needs: release

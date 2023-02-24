@@ -47,14 +47,13 @@ junit.xml
 !/.prettierignore
 !/.prettierrc.json
 !/test/
+!/tsconfig.json
 !/tsconfig.dev.json
 !/src/
 /lib
 /dist/
 !/.eslintrc.json
-.jsii
-tsconfig.json
-!/API.md
 !/codecov.yml
 !/.github/workflows/renovate.yml
+!/typedoc.json
 !/renovate.json5

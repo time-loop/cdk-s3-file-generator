@@ -23,6 +23,12 @@ export interface UploadProps {
    * Name of the file, to be created in the path.
    */
   readonly fileName: string;
+  /**
+   * Whether or not to clear out the destination directory before uploading.
+   *
+   * @default false
+   */
+  readonly prune?: boolean;
 }
 
 export interface SerializerProps {
@@ -145,6 +151,7 @@ export class Generator extends Construct {
       destinationBucket: Bucket.fromBucketArn(this, 'bucket', this._uploadProps.bucketArn),
       destinationKeyPrefix: this._uploadProps.path,
       sources: [Source.jsonData(this._uploadProps.fileName, contents)],
+      prune: this._uploadProps.prune ?? false,
     });
   }
 }

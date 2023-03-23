@@ -67,6 +67,23 @@ describe('Generator', () => {
       template.hasResourceProperties('Custom::CDKBucketDeployment', {
         DestinationBucketKeyPrefix: actualProps.upload.path,
         DestinationBucketName: actualProps.upload.bucketArn.split(':').pop(),
+        Prune: false,
+      });
+    });
+
+    it('prunes correctly when told to', () => {
+      new Generator(stack, 'Generator', {
+        ...actualProps,
+        upload: {
+          ...actualProps.upload,
+          prune: true,
+        },
+      });
+      const template = Template.fromStack(stack);
+      template.hasResourceProperties('Custom::CDKBucketDeployment', {
+        DestinationBucketKeyPrefix: actualProps.upload.path,
+        DestinationBucketName: actualProps.upload.bucketArn.split(':').pop(),
+        Prune: true,
       });
     });
   });

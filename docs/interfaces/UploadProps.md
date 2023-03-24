@@ -9,6 +9,7 @@
 - [bucketArn](UploadProps.md#bucketarn)
 - [fileName](UploadProps.md#filename)
 - [path](UploadProps.md#path)
+- [prune](UploadProps.md#prune)
 
 ## Properties
 
@@ -37,3 +38,15 @@ The path in the bucket to which the file will be uploaded.
 **`Default`**
 
 - root of the bucket
+
+___
+
+### prune
+
+• `Optional` `Readonly` **prune**: `boolean`
+
+Whether or not to clear out the destination directory before uploading.
+
+**`Default`**
+
+false

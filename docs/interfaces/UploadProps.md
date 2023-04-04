@@ -10,6 +10,7 @@
 - [fileName](UploadProps.md#filename)
 - [path](UploadProps.md#path)
 - [prune](UploadProps.md#prune)
+- [role](UploadProps.md#role)
 
 ## Properties
 
@@ -50,3 +51,15 @@ Whether or not to clear out the destination directory before uploading.
 **`Default`**
 
 false
+
+___
+
+### role
+
+• `Optional` `Readonly` **role**: `IRole`
+
+Used as the Lambda Execution Role for the BucketDeployment.
+
+**`Default`**
+
+- role is created automatically by the Construct

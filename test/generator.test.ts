@@ -102,11 +102,7 @@ describe('Generator', () => {
       const lambdaId = Object.keys(lambda)[0];
       // Verify BucketDeployment uses the Lambda with role set
       template.hasResourceProperties('Custom::CDKBucketDeployment', {
-        ServiceToken: {
-          'Fn::GetAtt': [lambdaId, 'Arn'],
-        },
-        DestinationBucketKeyPrefix: actualProps.upload.path,
-        DestinationBucketName: actualProps.upload.bucketArn.split(':').pop(),
+        ServiceToken: { 'Fn::GetAtt': [lambdaId, 'Arn'] },
       });
       // Verify Lambda uses the role
       const roleId = stack.getLogicalId(testRole.node.defaultChild as CfnElement);

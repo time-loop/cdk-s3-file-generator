@@ -1,7 +1,8 @@
 /* eslint-disable dot-notation */
 // ^ Helps us test private properties like functions and fields
-import { App, Stack } from 'aws-cdk-lib';
+import { App, CfnElement, Stack } from 'aws-cdk-lib';
 import { Template } from 'aws-cdk-lib/assertions';
+import { Role, ServicePrincipal } from 'aws-cdk-lib/aws-iam';
 import { schema } from './resources/test.schema';
 import { Generator, GeneratorFileType, GeneratorProps } from '../src';
 
@@ -84,6 +85,33 @@ describe('Generator', () => {
         DestinationBucketKeyPrefix: actualProps.upload.path,
         DestinationBucketName: actualProps.upload.bucketArn.split(':').pop(),
         Prune: true,
+      });
+    });
+
+    it('uses custom Lambda execution role when set', () => {
+      const testRole = new Role(stack, 'TestExecutionRole', { assumedBy: new ServicePrincipal('test.amazonaws.com') });
+      new Generator(stack, 'Generator', {
+        ...actualProps,
+        upload: {
+          ...actualProps.upload,
+          role: testRole,
+        },
+      });
+      const template = Template.fromStack(stack);
+      const lambda = template.findResources('AWS::Lambda::Function');
+      const lambdaId = Object.keys(lambda)[0];
+      // Verify BucketDeployment uses the Lambda with role set
+      template.hasResourceProperties('Custom::CDKBucketDeployment', {
+        ServiceToken: {
+          'Fn::GetAtt': [lambdaId, 'Arn'],
+        },
+        DestinationBucketKeyPrefix: actualProps.upload.path,
+        DestinationBucketName: actualProps.upload.bucketArn.split(':').pop(),
+      });
+      // Verify Lambda uses the role
+      const roleId = stack.getLogicalId(testRole.node.defaultChild as CfnElement);
+      template.hasResourceProperties('AWS::Lambda::Function', {
+        Role: { 'Fn::GetAtt': [roleId, 'Arn'] },
       });
     });
   });

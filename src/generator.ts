@@ -1,4 +1,5 @@
 import Ajv, { SchemaObject } from 'ajv';
+import { IRole } from 'aws-cdk-lib/aws-iam';
 import { Bucket } from 'aws-cdk-lib/aws-s3';
 import { BucketDeployment, Source } from 'aws-cdk-lib/aws-s3-deployment';
 import { Construct } from 'constructs';
@@ -29,6 +30,11 @@ export interface UploadProps {
    * @default false
    */
   readonly prune?: boolean;
+  /**
+   * Used as the Lambda Execution Role for the BucketDeployment.
+   * @default - role is created automatically by the Construct
+   */
+  readonly role?: IRole;
 }
 
 export interface SerializerProps {
@@ -152,6 +158,7 @@ export class Generator extends Construct {
       destinationKeyPrefix: this._uploadProps.path,
       sources: [Source.jsonData(this._uploadProps.fileName, contents)],
       prune: this._uploadProps.prune ?? false,
+      role: this._uploadProps.role,
     });
   }
 }

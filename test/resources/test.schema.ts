@@ -3,6 +3,8 @@ import { JSONSchemaType } from 'ajv';
 interface Schema {
   test: boolean;
   test1: boolean;
+  test2?: number;
+  testLessThanTest2?: number;
   testComplex: { foo?: string; arr: number[] };
 }
 
@@ -31,6 +33,15 @@ export const schema: JSONSchemaType<Schema> = {
     },
     test1: {
       type: 'boolean',
+    },
+    test2: {
+      type: 'integer',
+      nullable: true,
+    },
+    testLessThanTest2: {
+      type: 'integer',
+      nullable: true,
+      maximum: { $data: '1/test2' } as unknown as number,
     },
     testComplex: objSchema,
   },

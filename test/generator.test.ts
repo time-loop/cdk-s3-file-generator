@@ -31,6 +31,7 @@ describe('Generator', () => {
       { test: false, test1: true, testComplex: { foo: 'buildee', arr: [1] } },
       { test: false, test1: true, testComplex: { arr: [1] } },
       { test: false, test1: true, testComplex: { yield: 'no', arr: [1] } }, // additionalProperties allowed here
+      { test: false, test1: true, test2: 2, testLessThanTest2: 2, testComplex: { arr: [1] } }, // testLessThanTest2 is less than test2
     ];
 
     const testCasesShouldFail = [
@@ -41,6 +42,7 @@ describe('Generator', () => {
       { test: false, test1: true, testComplex: { arr: [1, 2, 3] } },
       { test: false, test1: true, notInSchema: 'correct', testComplex: { arr: [1, 2, 3] } },
       { test: false, test1: true, test2: true, testComplex: { arr: [1] } }, // additionalProperties NOT allowed here
+      { test: false, test1: true, test2: 2, testLessThanTest2: 3, testComplex: { arr: [1] } }, // testLessThanTest2 is GREATER than test2
     ];
 
     test.each(testCasesShouldSucceed)('validateFileContents succeeds properly', (testContents) => {

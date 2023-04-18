@@ -3,7 +3,7 @@ import { IRole } from 'aws-cdk-lib/aws-iam';
 import { Bucket } from 'aws-cdk-lib/aws-s3';
 import { BucketDeployment, Source } from 'aws-cdk-lib/aws-s3-deployment';
 import { Construct } from 'constructs';
-const ajv = new Ajv();
+const ajv = new Ajv({ $data: true });
 
 export enum GeneratorFileType {
   JSON = 'generator_json',

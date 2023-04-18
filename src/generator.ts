@@ -3,7 +3,12 @@ import { IRole } from 'aws-cdk-lib/aws-iam';
 import { Bucket } from 'aws-cdk-lib/aws-s3';
 import { BucketDeployment, Source } from 'aws-cdk-lib/aws-s3-deployment';
 import { Construct } from 'constructs';
-const ajv = new Ajv();
+
+// $data fields in schemas allow us to set conditional permitted values.
+// For example, if we have two numbers `num1` and `num2`, where `num2` cannot
+// exceed `num1`, we can use a `$data` reference to enforce that.
+// See test/resources/test.schema.ts `testLessThanTest2` for an example.
+const ajv = new Ajv({ $data: true });
 
 export enum GeneratorFileType {
   JSON = 'generator_json',

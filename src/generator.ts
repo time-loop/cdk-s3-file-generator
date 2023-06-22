@@ -36,6 +36,19 @@ export interface UploadProps {
    */
   readonly prune?: boolean;
   /**
+   * Whether or not to delete the objects from the bucket when this resource
+   * is deleted/updated from the stack.
+   *
+   * NOTE: Changing the logical ID of the `BucketDeployment` construct, without changing the destination
+   * (for example due to refactoring, or intentional ID change) **will result in the deletion of the objects**.
+   * This is because CloudFormation will first create the new resource, which will have no affect,
+   * followed by a deletion of the old resource, which will cause a deletion of the objects,
+   * since the destination hasn't changed, and `retainOnDelete` is `false`.
+   *
+   * @default true
+   */
+  readonly retainOnDelete?: boolean;
+  /**
    * Used as the Lambda Execution Role for the BucketDeployment.
    * @default - role is created automatically by the Construct
    */
@@ -163,6 +176,7 @@ export class Generator extends Construct {
       destinationKeyPrefix: this._uploadProps.path,
       sources: [Source.jsonData(this._uploadProps.fileName, contents)],
       prune: this._uploadProps.prune ?? false,
+      retainOnDelete: this._uploadProps.retainOnDelete,
       role: this._uploadProps.role,
     });
   }

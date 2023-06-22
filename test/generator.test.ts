@@ -1,7 +1,7 @@
 /* eslint-disable dot-notation */
 // ^ Helps us test private properties like functions and fields
 import { App, CfnElement, Stack } from 'aws-cdk-lib';
-import { Template } from 'aws-cdk-lib/assertions';
+import { Match, Template } from 'aws-cdk-lib/assertions';
 import { Role, ServicePrincipal } from 'aws-cdk-lib/aws-iam';
 import { schema } from './resources/test.schema';
 import { Generator, GeneratorFileType, GeneratorProps } from '../src';
@@ -87,6 +87,32 @@ describe('Generator', () => {
         DestinationBucketKeyPrefix: actualProps.upload.path,
         DestinationBucketName: actualProps.upload.bucketArn.split(':').pop(),
         Prune: true,
+      });
+    });
+
+    it('retains objects by default', () => {
+      new Generator(stack, 'Generator', actualProps);
+      const template = Template.fromStack(stack);
+      template.hasResourceProperties('Custom::CDKBucketDeployment', {
+        DestinationBucketKeyPrefix: actualProps.upload.path,
+        DestinationBucketName: actualProps.upload.bucketArn.split(':').pop(),
+        RetainOnDelete: Match.absent(),
+      });
+    });
+
+    it('does not retain objects when told not to', () => {
+      new Generator(stack, 'Generator', {
+        ...actualProps,
+        upload: {
+          ...actualProps.upload,
+          retainOnDelete: false,
+        },
+      });
+      const template = Template.fromStack(stack);
+      template.hasResourceProperties('Custom::CDKBucketDeployment', {
+        DestinationBucketKeyPrefix: actualProps.upload.path,
+        DestinationBucketName: actualProps.upload.bucketArn.split(':').pop(),
+        RetainOnDelete: false,
       });
     });
 

@@ -7,6 +7,7 @@ const project = new clickupTs.ClickUpTypeScriptProject({
   name: 'cdk-s3-file-generator',
   repository: 'https://github.com/time-loop/cdk-s3-file-generator.git',
   projenrcTs: true,
+  minMajorVersion: 1,
 
   peerDeps: ['aws-cdk-lib', 'constructs', 'ajv'],
   // deps: ['ajv'] /* Runtime dependencies of this module. */,

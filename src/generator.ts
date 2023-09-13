@@ -1,6 +1,6 @@
 import Ajv, { SchemaObject } from 'ajv';
 import { IRole } from 'aws-cdk-lib/aws-iam';
-import { Bucket } from 'aws-cdk-lib/aws-s3';
+import { IBucket } from 'aws-cdk-lib/aws-s3';
 import { BucketDeployment, Source } from 'aws-cdk-lib/aws-s3-deployment';
 import { Construct } from 'constructs';
 
@@ -19,7 +19,7 @@ export interface UploadProps {
   /**
    * Bucket where the file will be uploaded.
    */
-  readonly bucketArn: string;
+  readonly bucket: IBucket;
   /**
    * The path in the bucket to which the file will be uploaded.
    * @default - root of the bucket
@@ -71,6 +71,11 @@ export interface SerializerProps {
   //readonly validator?: (contents: any) => boolean;
 }
 
+export interface ConstructProps {
+  readonly id: string;
+  readonly scope: Construct;
+}
+
 export interface GeneratorProps {
   /**
    * The data to be marshalled.
@@ -87,17 +92,19 @@ export interface GeneratorProps {
   readonly upload: UploadProps;
 }
 
-export class Generator extends Construct {
+export class Generator {
   private readonly _contents: any;
   private readonly _fileType: GeneratorFileType;
   private readonly _serializerProps?: SerializerProps;
   private readonly _uploadProps: UploadProps;
+  private readonly _constructProps: ConstructProps;
+
   constructor(scope: Construct, id: string, props: GeneratorProps) {
-    super(scope, id);
     this._contents = props.contents;
     this._fileType = props.fileType;
     this._serializerProps = props.serializer;
     this._uploadProps = props.upload;
+    this._constructProps = { id, scope };
 
     try {
       this.validateFileContents(this._contents, this._serializerProps?.schema);
@@ -170,9 +177,8 @@ export class Generator extends Construct {
     //     break;
     // }
     const contents = this.generateFileContents();
-    // TODO: Figure out the logical ID instead of hardcode
-    new BucketDeployment(this, 'file', {
-      destinationBucket: Bucket.fromBucketArn(this, 'bucket', this._uploadProps.bucketArn),
+    new BucketDeployment(this._constructProps.scope, this._constructProps.id, {
+      destinationBucket: this._uploadProps.bucket,
       destinationKeyPrefix: this._uploadProps.path,
       sources: [Source.jsonData(this._uploadProps.fileName, contents)],
       prune: this._uploadProps.prune ?? false,

@@ -3,29 +3,33 @@
 import { App, CfnElement, Stack } from 'aws-cdk-lib';
 import { Match, Template } from 'aws-cdk-lib/assertions';
 import { Role, ServicePrincipal } from 'aws-cdk-lib/aws-iam';
+import { Bucket } from 'aws-cdk-lib/aws-s3';
 import { schema } from './resources/test.schema';
 import { Generator, GeneratorFileType, GeneratorProps } from '../src';
 
 describe('Generator', () => {
-  const props: Omit<GeneratorProps, 'contents'> = {
-    fileType: GeneratorFileType.JSON,
-    upload: {
-      bucketArn: 'arn:aws:s3:1232387877:testArn:test-clickup-bucket',
-      path: 'topLevelFolder',
-      fileName: 'test.json',
-    },
-  };
-
   let app: App;
   let stack: Stack;
-  beforeEach(() => {
+  let props: Omit<GeneratorProps, 'contents'>;
+
+  const setupStack = () => {
     app = new App();
     stack = new Stack(app, 'TestStack');
-  });
+    const bucket = Bucket.fromBucketArn(stack, 'TestBucket', 'arn:aws:s3:1232387877:testArn:test-clickup-bucket');
+    props = {
+      fileType: GeneratorFileType.JSON,
+      upload: {
+        bucket,
+        path: 'topLevelFolder',
+        fileName: 'test.json',
+      },
+    };
+  };
   // test('generateFileContents', () => {
   //   expect(new Generator(app, 'test', props)['generateFileContents']()).toEqual(props.contents);
   // });
   describe('validateFileContents', () => {
+    setupStack();
     const testCasesShouldSucceed = [
       { test: true, test1: false, testComplex: { foo: 'bar', arr: [1, 2] } },
       { test: false, test1: true, testComplex: { foo: 'buildee', arr: [1] } },
@@ -46,6 +50,7 @@ describe('Generator', () => {
     ];
 
     test.each(testCasesShouldSucceed)('validateFileContents succeeds properly', (testContents) => {
+      setupStack();
       const actualProps: GeneratorProps = { ...props, contents: testContents };
       expect(() =>
         new Generator(stack, 'test', actualProps)['validateFileContents'](testContents, schema),
@@ -53,12 +58,14 @@ describe('Generator', () => {
     });
 
     test.each(testCasesShouldFail)('validateFileContents fails properly', (testContents) => {
+      setupStack();
       const actualProps: GeneratorProps = { ...props, contents: testContents };
       expect(() => new Generator(stack, 'test', actualProps)['validateFileContents'](testContents, schema)).toThrow();
     });
   });
 
   describe('uploadToS3', () => {
+    beforeEach(setupStack);
     const actualProps: GeneratorProps = {
       ...props,
       contents: { test: true, test1: false, testComplex: { foo: 'bar', arr: [1, 2] } },
@@ -69,7 +76,7 @@ describe('Generator', () => {
       const template = Template.fromStack(stack);
       template.hasResourceProperties('Custom::CDKBucketDeployment', {
         DestinationBucketKeyPrefix: actualProps.upload.path,
-        DestinationBucketName: actualProps.upload.bucketArn.split(':').pop(),
+        DestinationBucketName: actualProps.upload.bucket.bucketArn.split(':').pop(),
         Prune: false,
       });
     });
@@ -85,7 +92,7 @@ describe('Generator', () => {
       const template = Template.fromStack(stack);
       template.hasResourceProperties('Custom::CDKBucketDeployment', {
         DestinationBucketKeyPrefix: actualProps.upload.path,
-        DestinationBucketName: actualProps.upload.bucketArn.split(':').pop(),
+        DestinationBucketName: actualProps.upload.bucket.bucketArn.split(':').pop(),
         Prune: true,
       });
     });
@@ -95,7 +102,7 @@ describe('Generator', () => {
       const template = Template.fromStack(stack);
       template.hasResourceProperties('Custom::CDKBucketDeployment', {
         DestinationBucketKeyPrefix: actualProps.upload.path,
-        DestinationBucketName: actualProps.upload.bucketArn.split(':').pop(),
+        DestinationBucketName: actualProps.upload.bucket.bucketArn.split(':').pop(),
         RetainOnDelete: Match.absent(),
       });
     });
@@ -111,7 +118,7 @@ describe('Generator', () => {
       const template = Template.fromStack(stack);
       template.hasResourceProperties('Custom::CDKBucketDeployment', {
         DestinationBucketKeyPrefix: actualProps.upload.path,
-        DestinationBucketName: actualProps.upload.bucketArn.split(':').pop(),
+        DestinationBucketName: actualProps.upload.bucket.bucketArn.split(':').pop(),
         RetainOnDelete: false,
       });
     });

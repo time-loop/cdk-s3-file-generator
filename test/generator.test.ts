@@ -1,5 +1,3 @@
-/* eslint-disable dot-notation */
-// ^ Helps us test private properties like functions and fields
 import { App, CfnElement, Stack } from 'aws-cdk-lib';
 import { Match, Template } from 'aws-cdk-lib/assertions';
 import { Role, ServicePrincipal } from 'aws-cdk-lib/aws-iam';
@@ -18,10 +16,11 @@ describe('Generator', () => {
     const bucket = Bucket.fromBucketArn(stack, 'TestBucket', 'arn:aws:s3:1232387877:testArn:test-clickup-bucket');
     props = {
       fileType: GeneratorFileType.JSON,
-      upload: {
-        bucket,
-        path: 'topLevelFolder',
-        fileName: 'test.json',
+      destinationBucket: bucket,
+      destinationKeyPrefix: 'topLevelFolder',
+      fileName: 'test.json',
+      serializer: {
+        schema,
       },
     };
   };
@@ -52,15 +51,15 @@ describe('Generator', () => {
     test.each(testCasesShouldSucceed)('validateFileContents succeeds properly', (testContents) => {
       setupStack();
       const actualProps: GeneratorProps = { ...props, contents: testContents };
-      expect(() =>
-        new Generator(stack, 'test', actualProps)['validateFileContents'](testContents, schema),
-      ).not.toThrow();
+      expect(() => new Generator(stack, 'test', actualProps)).not.toThrow();
     });
 
     test.each(testCasesShouldFail)('validateFileContents fails properly', (testContents) => {
       setupStack();
       const actualProps: GeneratorProps = { ...props, contents: testContents };
-      expect(() => new Generator(stack, 'test', actualProps)['validateFileContents'](testContents, schema)).toThrow();
+      expect(() => new Generator(stack, 'test', actualProps)).toThrow(
+        new RegExp('Failed validation of contents against schema.*'),
+      );
     });
   });
 
@@ -75,8 +74,8 @@ describe('Generator', () => {
       new Generator(stack, 'Generator', actualProps);
       const template = Template.fromStack(stack);
       template.hasResourceProperties('Custom::CDKBucketDeployment', {
-        DestinationBucketKeyPrefix: actualProps.upload.path,
-        DestinationBucketName: actualProps.upload.bucket.bucketArn.split(':').pop(),
+        DestinationBucketKeyPrefix: actualProps.destinationKeyPrefix,
+        DestinationBucketName: actualProps.destinationBucket.bucketName,
         Prune: false,
       });
     });
@@ -84,15 +83,12 @@ describe('Generator', () => {
     it('prunes correctly when told to', () => {
       new Generator(stack, 'Generator', {
         ...actualProps,
-        upload: {
-          ...actualProps.upload,
-          prune: true,
-        },
+        prune: true,
       });
       const template = Template.fromStack(stack);
       template.hasResourceProperties('Custom::CDKBucketDeployment', {
-        DestinationBucketKeyPrefix: actualProps.upload.path,
-        DestinationBucketName: actualProps.upload.bucket.bucketArn.split(':').pop(),
+        DestinationBucketKeyPrefix: actualProps.destinationKeyPrefix,
+        DestinationBucketName: actualProps.destinationBucket.bucketName,
         Prune: true,
       });
     });
@@ -101,8 +97,8 @@ describe('Generator', () => {
       new Generator(stack, 'Generator', actualProps);
       const template = Template.fromStack(stack);
       template.hasResourceProperties('Custom::CDKBucketDeployment', {
-        DestinationBucketKeyPrefix: actualProps.upload.path,
-        DestinationBucketName: actualProps.upload.bucket.bucketArn.split(':').pop(),
+        DestinationBucketKeyPrefix: actualProps.destinationKeyPrefix,
+        DestinationBucketName: actualProps.destinationBucket.bucketName,
         RetainOnDelete: Match.absent(),
       });
     });
@@ -110,15 +106,12 @@ describe('Generator', () => {
     it('does not retain objects when told not to', () => {
       new Generator(stack, 'Generator', {
         ...actualProps,
-        upload: {
-          ...actualProps.upload,
-          retainOnDelete: false,
-        },
+        retainOnDelete: false,
       });
       const template = Template.fromStack(stack);
       template.hasResourceProperties('Custom::CDKBucketDeployment', {
-        DestinationBucketKeyPrefix: actualProps.upload.path,
-        DestinationBucketName: actualProps.upload.bucket.bucketArn.split(':').pop(),
+        DestinationBucketKeyPrefix: actualProps.destinationKeyPrefix,
+        DestinationBucketName: actualProps.destinationBucket.bucketName,
         RetainOnDelete: false,
       });
     });
@@ -127,10 +120,7 @@ describe('Generator', () => {
       const testRole = new Role(stack, 'TestExecutionRole', { assumedBy: new ServicePrincipal('test.amazonaws.com') });
       new Generator(stack, 'Generator', {
         ...actualProps,
-        upload: {
-          ...actualProps.upload,
-          role: testRole,
-        },
+        role: testRole,
       });
       const template = Template.fromStack(stack);
       const lambda = template.findResources('AWS::Lambda::Function');

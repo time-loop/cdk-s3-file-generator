@@ -18,7 +18,7 @@
 <section class="tsd-panel tsd-hierarchy">
 <h4>Hierarchy</h4>
 <ul class="tsd-hierarchy">
-<li><span class="tsd-signature-type ">Construct</span>
+<li><span class="tsd-signature-type ">BucketDeployment</span>
 <ul class="tsd-hierarchy">
 <li><span class="target">Generator</span></li></ul></li></ul></section>
 <section class="tsd-panel-group tsd-index-group">
@@ -32,18 +32,17 @@
 </div></section>
 <section class="tsd-index-section">
 <h3 class="tsd-index-heading">Properties</h3>
-<div class="tsd-index-list"><a href="Generator.html#_contents" class="tsd-index-link tsd-is-private"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-1024"></use></svg><span>_contents</span></a>
-<a href="Generator.html#_fileType" class="tsd-index-link tsd-is-private"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-1024"></use></svg><span>_file<wbr/>Type</span></a>
-<a href="Generator.html#_serializerProps" class="tsd-index-link tsd-is-private"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-1024"></use></svg><span>_serializer<wbr/>Props?</span></a>
-<a href="Generator.html#_uploadProps" class="tsd-index-link tsd-is-private"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-1024"></use></svg><span>_upload<wbr/>Props</span></a>
-<a href="Generator.html#node" class="tsd-index-link tsd-is-inherited tsd-is-external"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-1024"></use></svg><span>node</span></a>
+<div class="tsd-index-list"><a href="Generator.html#node" class="tsd-index-link tsd-is-inherited tsd-is-external"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-1024"></use></svg><span>node</span></a>
+</div></section>
+<section class="tsd-index-section">
+<h3 class="tsd-index-heading">Accessors</h3>
+<div class="tsd-index-list"><a href="Generator.html#deployedBucket" class="tsd-index-link tsd-is-inherited tsd-is-external"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-262144"></use></svg><span>deployed<wbr/>Bucket</span></a>
+<a href="Generator.html#objectKeys" class="tsd-index-link tsd-is-inherited tsd-is-external"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-262144"></use></svg><span>object<wbr/>Keys</span></a>
 </div></section>
 <section class="tsd-index-section">
 <h3 class="tsd-index-heading">Methods</h3>
-<div class="tsd-index-list"><a href="Generator.html#generateFileContents" class="tsd-index-link tsd-is-private"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2048"></use></svg><span>generate<wbr/>File<wbr/>Contents</span></a>
+<div class="tsd-index-list"><a href="Generator.html#addSource" class="tsd-index-link tsd-is-inherited tsd-is-external"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2048"></use></svg><span>add<wbr/>Source</span></a>
 <a href="Generator.html#toString" class="tsd-index-link tsd-is-inherited tsd-is-external"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2048"></use></svg><span>to<wbr/>String</span></a>
-<a href="Generator.html#uploadToS3" class="tsd-index-link tsd-is-private"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2048"></use></svg><span>upload<wbr/>To<wbr/>S3</span></a>
-<a href="Generator.html#validateFileContents" class="tsd-index-link tsd-is-private"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2048"></use></svg><span>validate<wbr/>File<wbr/>Contents</span></a>
 <a href="Generator.html#isConstruct" class="tsd-index-link tsd-is-inherited tsd-is-external"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2048"></use></svg><span>is<wbr/>Construct</span></a>
 </div></section></div></details></section></section>
 <section class="tsd-panel-group tsd-member-group">
@@ -63,36 +62,70 @@
 <li>
 <h5><span class="tsd-kind-parameter">props</span>: <a href="../interfaces/GeneratorProps.html" class="tsd-signature-type tsd-kind-interface">GeneratorProps</a></h5></li></ul></div>
 <h4 class="tsd-returns-title">Returns <a href="Generator.html" class="tsd-signature-type tsd-kind-class">Generator</a></h4><aside class="tsd-sources">
-<p>Overrides Construct.constructor</p></aside></li></ul></section></section>
+<p>Overrides BucketDeployment.constructor</p></aside></li></ul></section></section>
 <section class="tsd-panel-group tsd-member-group">
 <h2>Properties</h2>
-<section class="tsd-panel tsd-member tsd-is-private"><a id="_contents" class="tsd-anchor"></a>
-<h3 class="tsd-anchor-link"><code class="tsd-tag ts-flagPrivate">Private</code> <code class="tsd-tag ts-flagReadonly">Readonly</code> <span>_contents</span><a href="#_contents" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
-<div class="tsd-signature"><span class="tsd-kind-property">_contents</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span></div></section>
-<section class="tsd-panel tsd-member tsd-is-private"><a id="_fileType" class="tsd-anchor"></a>
-<h3 class="tsd-anchor-link"><code class="tsd-tag ts-flagPrivate">Private</code> <code class="tsd-tag ts-flagReadonly">Readonly</code> <span>_file<wbr/>Type</span><a href="#_fileType" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
-<div class="tsd-signature"><span class="tsd-kind-property">_file<wbr/>Type</span><span class="tsd-signature-symbol">:</span> <a href="../enums/GeneratorFileType.html#JSON" class="tsd-signature-type tsd-kind-enum-member">JSON</a></div></section>
-<section class="tsd-panel tsd-member tsd-is-private"><a id="_serializerProps" class="tsd-anchor"></a>
-<h3 class="tsd-anchor-link"><code class="tsd-tag ts-flagPrivate">Private</code> <code class="tsd-tag ts-flagOptional">Optional</code> <code class="tsd-tag ts-flagReadonly">Readonly</code> <span>_serializer<wbr/>Props</span><a href="#_serializerProps" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
-<div class="tsd-signature"><span class="tsd-kind-property">_serializer<wbr/>Props</span><span class="tsd-signature-symbol">?:</span> <a href="../interfaces/SerializerProps.html" class="tsd-signature-type tsd-kind-interface">SerializerProps</a></div></section>
-<section class="tsd-panel tsd-member tsd-is-private"><a id="_uploadProps" class="tsd-anchor"></a>
-<h3 class="tsd-anchor-link"><code class="tsd-tag ts-flagPrivate">Private</code> <code class="tsd-tag ts-flagReadonly">Readonly</code> <span>_upload<wbr/>Props</span><a href="#_uploadProps" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
-<div class="tsd-signature"><span class="tsd-kind-property">_upload<wbr/>Props</span><span class="tsd-signature-symbol">:</span> <a href="../interfaces/UploadProps.html" class="tsd-signature-type tsd-kind-interface">UploadProps</a></div></section>
 <section class="tsd-panel tsd-member tsd-is-inherited tsd-is-external"><a id="node" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><code class="tsd-tag ts-flagReadonly">Readonly</code> <span>node</span><a href="#node" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
 <div class="tsd-signature"><span class="tsd-kind-property">node</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type ">Node</span></div>
 <div class="tsd-comment tsd-typography"><p>The tree node.</p>
 </div>
 <div class="tsd-comment tsd-typography"></div><aside class="tsd-sources">
-<p>Inherited from Construct.node</p></aside></section></section>
+<p>Inherited from BucketDeployment.node</p></aside></section></section>
+<section class="tsd-panel-group tsd-member-group">
+<h2>Accessors</h2>
+<section class="tsd-panel tsd-member tsd-is-inherited tsd-is-external"><a id="deployedBucket" class="tsd-anchor"></a>
+<h3 class="tsd-anchor-link"><span>deployed<wbr/>Bucket</span><a href="#deployedBucket" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
+<ul class="tsd-signatures tsd-is-inherited tsd-is-external">
+<li class="tsd-signature" id="deployedBucket.deployedBucket-1"><span class="tsd-signature-symbol">get</span> deployedBucket<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type ">IBucket</span></li>
+<li class="tsd-description">
+<div class="tsd-comment tsd-typography"><p>The bucket after the deployment</p>
+<p>If you want to reference the destination bucket in another construct and make sure the
+bucket deployment has happened before the next operation is started, pass the other construct
+a reference to <code>deployment.deployedBucket</code>.</p>
+<p>Note that this only returns an immutable reference to the destination bucket.
+If sequenced access to the original destination bucket is required, you may add a dependency
+on the bucket deployment instead: <code>otherResource.node.addDependency(deployment)</code></p>
+</div>
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type ">IBucket</span></h4>
+<div class="tsd-comment tsd-typography"></div><aside class="tsd-sources">
+<p>Inherited from BucketDeployment.deployedBucket</p></aside></li></ul></section>
+<section class="tsd-panel tsd-member tsd-is-inherited tsd-is-external"><a id="objectKeys" class="tsd-anchor"></a>
+<h3 class="tsd-anchor-link"><span>object<wbr/>Keys</span><a href="#objectKeys" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
+<ul class="tsd-signatures tsd-is-inherited tsd-is-external">
+<li class="tsd-signature" id="objectKeys.objectKeys-1"><span class="tsd-signature-symbol">get</span> objectKeys<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span></li>
+<li class="tsd-description">
+<div class="tsd-comment tsd-typography"><p>The object keys for the sources deployed to the S3 bucket.</p>
+<p>This returns a list of tokenized object keys for source files that are deployed to the bucket.</p>
+<p>This can be useful when using <code>BucketDeployment</code> with <code>extract</code> set to <code>false</code> and you need to reference
+the object key that resides in the bucket for that zip source file somewhere else in your CDK
+application, such as in a CFN output.</p>
+<p>For example, use <code>Fn.select(0, myBucketDeployment.objectKeys)</code> to reference the object key of the
+first source file in your bucket deployment.</p>
+</div>
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span></h4>
+<div class="tsd-comment tsd-typography"></div><aside class="tsd-sources">
+<p>Inherited from BucketDeployment.objectKeys</p></aside></li></ul></section></section>
 <section class="tsd-panel-group tsd-member-group">
 <h2>Methods</h2>
-<section class="tsd-panel tsd-member tsd-is-private"><a id="generateFileContents" class="tsd-anchor"></a>
-<h3 class="tsd-anchor-link"><code class="tsd-tag ts-flagPrivate">Private</code> <span>generate<wbr/>File<wbr/>Contents</span><a href="#generateFileContents" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
-<ul class="tsd-signatures tsd-is-private">
-<li class="tsd-signature tsd-anchor-link" id="generateFileContents.generateFileContents-1"><span class="tsd-kind-call-signature">generate<wbr/>File<wbr/>Contents</span><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><a href="#generateFileContents.generateFileContents-1" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></li>
+<section class="tsd-panel tsd-member tsd-is-inherited tsd-is-external"><a id="addSource" class="tsd-anchor"></a>
+<h3 class="tsd-anchor-link"><span>add<wbr/>Source</span><a href="#addSource" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
+<ul class="tsd-signatures tsd-is-inherited tsd-is-external">
+<li class="tsd-signature tsd-anchor-link" id="addSource.addSource-1"><span class="tsd-kind-call-signature">add<wbr/>Source</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">source</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span><a href="#addSource.addSource-1" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></li>
 <li class="tsd-description">
-<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">any</span></h4></li></ul></section>
+<div class="tsd-comment tsd-typography"><p>Add an additional source to the bucket deployment</p>
+</div>
+<div class="tsd-parameters">
+<h4 class="tsd-parameters-title">Parameters</h4>
+<ul class="tsd-parameter-list">
+<li>
+<h5><span class="tsd-kind-parameter">source</span>: <span class="tsd-signature-type ">ISource</span></h5></li></ul></div>
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+<div class="tsd-comment tsd-typography">
+<h4>Example</h4><pre><code class="language-ts"><span class="hl-0">declare</span><span class="hl-1"> </span><span class="hl-0">const</span><span class="hl-1"> </span><span class="hl-2">websiteBucket</span><span class="hl-1">: </span><span class="hl-3">s3</span><span class="hl-1">.</span><span class="hl-3">IBucket</span><span class="hl-1">;</span><br/><span class="hl-0">const</span><span class="hl-1"> </span><span class="hl-2">deployment</span><span class="hl-1"> = </span><span class="hl-0">new</span><span class="hl-1"> </span><span class="hl-4">s3deploy</span><span class="hl-1">.</span><span class="hl-5">BucketDeployment</span><span class="hl-1">(</span><span class="hl-0">this</span><span class="hl-1">, </span><span class="hl-6">&#39;Deployment&#39;</span><span class="hl-1">, {</span><br/><span class="hl-1">  </span><span class="hl-4">sources:</span><span class="hl-1"> [</span><span class="hl-4">s3deploy</span><span class="hl-1">.</span><span class="hl-4">Source</span><span class="hl-1">.</span><span class="hl-5">asset</span><span class="hl-1">(</span><span class="hl-6">&#39;./website-dist&#39;</span><span class="hl-1">)],</span><br/><span class="hl-1">  </span><span class="hl-4">destinationBucket:</span><span class="hl-1"> </span><span class="hl-4">websiteBucket</span><span class="hl-1">,</span><br/><span class="hl-1">});</span><br/><br/><span class="hl-4">deployment</span><span class="hl-1">.</span><span class="hl-5">addSource</span><span class="hl-1">(</span><span class="hl-4">s3deploy</span><span class="hl-1">.</span><span class="hl-4">Source</span><span class="hl-1">.</span><span class="hl-5">asset</span><span class="hl-1">(</span><span class="hl-6">&#39;./another-asset&#39;</span><span class="hl-1">));</span>
+</code><button>Copy</button></pre>
+</div><aside class="tsd-sources">
+<p>Inherited from BucketDeployment.addSource</p></aside></li></ul></section>
 <section class="tsd-panel tsd-member tsd-is-inherited tsd-is-external"><a id="toString" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>to<wbr/>String</span><a href="#toString" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-is-inherited tsd-is-external">
@@ -102,32 +135,7 @@
 </div>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4>
 <div class="tsd-comment tsd-typography"></div><aside class="tsd-sources">
-<p>Inherited from Construct.toString</p></aside></li></ul></section>
-<section class="tsd-panel tsd-member tsd-is-private"><a id="uploadToS3" class="tsd-anchor"></a>
-<h3 class="tsd-anchor-link"><code class="tsd-tag ts-flagPrivate">Private</code> <span>upload<wbr/>To<wbr/>S3</span><a href="#uploadToS3" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
-<ul class="tsd-signatures tsd-is-private">
-<li class="tsd-signature tsd-anchor-link" id="uploadToS3.uploadToS3-1"><span class="tsd-kind-call-signature">upload<wbr/>To<wbr/>S3</span><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span><a href="#uploadToS3.uploadToS3-1" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></li>
-<li class="tsd-description">
-<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4></li></ul></section>
-<section class="tsd-panel tsd-member tsd-is-private"><a id="validateFileContents" class="tsd-anchor"></a>
-<h3 class="tsd-anchor-link"><code class="tsd-tag ts-flagPrivate">Private</code> <span>validate<wbr/>File<wbr/>Contents</span><a href="#validateFileContents" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
-<ul class="tsd-signatures tsd-is-private">
-<li class="tsd-signature tsd-anchor-link" id="validateFileContents.validateFileContents-1"><span class="tsd-kind-call-signature">validate<wbr/>File<wbr/>Contents</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">contents</span>, <span class="tsd-kind-parameter">schema</span><span class="tsd-signature-symbol">?</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span><a href="#validateFileContents.validateFileContents-1" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></li>
-<li class="tsd-description">
-<div class="tsd-comment tsd-typography"><p>Ensures the contents adhere to the schema, and the values adhere to
-validator specifications.</p>
-</div>
-<div class="tsd-parameters">
-<h4 class="tsd-parameters-title">Parameters</h4>
-<ul class="tsd-parameter-list">
-<li>
-<h5><span class="tsd-kind-parameter">contents</span>: <span class="tsd-signature-type">any</span></h5></li>
-<li>
-<h5><code class="tsd-tag ts-flagOptional">Optional</code> <span class="tsd-kind-parameter">schema</span>: <span class="tsd-signature-type ">SchemaObject</span></h5></li></ul></div>
-<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
-<div class="tsd-comment tsd-typography">
-<h4>Throws</h4><p>if the contents do not match the provided schema</p>
-</div></li></ul></section>
+<p>Inherited from BucketDeployment.toString</p></aside></li></ul></section>
 <section class="tsd-panel tsd-member tsd-is-inherited tsd-is-external"><a id="isConstruct" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><code class="tsd-tag ts-flagStatic">Static</code> <span>is<wbr/>Construct</span><a href="#isConstruct" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-is-inherited tsd-is-external">
@@ -158,7 +166,7 @@ this type-testing method instead.</p>
 <h4 class="tsd-returns-title">Returns <span class="tsd-kind-parameter">x</span><span class="tsd-signature-symbol"> is </span><span class="tsd-signature-type ">Construct</span></h4><p>true if <code>x</code> is an object created from a class which extends <code>Construct</code>.</p>
 
 <div class="tsd-comment tsd-typography"></div><aside class="tsd-sources">
-<p>Inherited from Construct.isConstruct</p></aside></li></ul></section></section></div>
+<p>Inherited from BucketDeployment.isConstruct</p></aside></li></ul></section></section></div>
 <div class="col-sidebar">
 <div class="page-menu">
 <div class="tsd-navigation settings">
@@ -179,21 +187,18 @@ this type-testing method instead.</p>
 <div class="tsd-accordion-details">
 <ul>
 <li><a href="#constructor" class=""><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-512"></use></svg><span>constructor</span></a></li>
-<li><a href="#_contents" class="tsd-is-private"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-1024"></use></svg><span>_contents</span></a></li>
-<li><a href="#_fileType" class="tsd-is-private"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-1024"></use></svg><span>_file<wbr/>Type</span></a></li>
-<li><a href="#_serializerProps" class="tsd-is-private"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-1024"></use></svg><span>_serializer<wbr/>Props</span></a></li>
-<li><a href="#_uploadProps" class="tsd-is-private"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-1024"></use></svg><span>_upload<wbr/>Props</span></a></li>
 <li><a href="#node" class="tsd-is-inherited tsd-is-external"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-1024"></use></svg><span>node</span></a></li>
-<li><a href="#generateFileContents" class="tsd-is-private"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2048"></use></svg><span>generate<wbr/>File<wbr/>Contents</span></a></li>
+<li><a href="#deployedBucket" class="tsd-is-inherited tsd-is-external"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-262144"></use></svg><span>deployed<wbr/>Bucket</span></a></li>
+<li><a href="#objectKeys" class="tsd-is-inherited tsd-is-external"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-262144"></use></svg><span>object<wbr/>Keys</span></a></li>
+<li><a href="#addSource" class="tsd-is-inherited tsd-is-external"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2048"></use></svg><span>add<wbr/>Source</span></a></li>
 <li><a href="#toString" class="tsd-is-inherited tsd-is-external"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2048"></use></svg><span>to<wbr/>String</span></a></li>
-<li><a href="#uploadToS3" class="tsd-is-private"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2048"></use></svg><span>upload<wbr/>To<wbr/>S3</span></a></li>
-<li><a href="#validateFileContents" class="tsd-is-private"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2048"></use></svg><span>validate<wbr/>File<wbr/>Contents</span></a></li>
 <li><a href="#isConstruct" class="tsd-is-inherited tsd-is-external"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2048"></use></svg><span>is<wbr/>Construct</span></a></li></ul></div></details></div>
 <div class="site-menu">
 <nav class="tsd-navigation"><a href="../index.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-1"></use></svg><span>@time-loop/cdk-s3-file-generator</span></a>
 <ul class="tsd-small-nested-navigation" id="tsd-nav-container" data-base="..">
 <li><a href="../enums/GeneratorFileType.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-8"></use></svg>GeneratorFileType</a></li>
 <li><a href="Generator.html" class="current"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-128"></use></svg>Generator</a></li>
+<li><a href="../interfaces/ConstructProps.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-256"></use></svg>ConstructProps</a></li>
 <li><a href="../interfaces/GeneratorProps.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-256"></use></svg>GeneratorProps</a></li>
 <li><a href="../interfaces/SerializerProps.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-256"></use></svg>SerializerProps</a></li>
 <li><a href="../interfaces/UploadProps.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-256"></use></svg>UploadProps</a></li></ul></nav></div></div></div>

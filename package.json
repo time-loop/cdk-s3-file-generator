@@ -21,6 +21,7 @@
     "test:watch": "npx projen test:watch",
     "typedocDocgen": "npx projen typedocDocgen",
     "unbump": "npx projen unbump",
+    "update-projen": "npx projen update-projen",
     "upgrade": "npx projen upgrade",
     "watch": "npx projen watch",
     "projen": "npx projen"
@@ -31,13 +32,13 @@
     "organization": true
   },
   "devDependencies": {
-    "@time-loop/clickup-projen": "^0.0.161",
+    "@time-loop/clickup-projen": "^0.0.178",
     "@types/jest": "^27",
     "@types/node": "^14",
-    "@typescript-eslint/eslint-plugin": "^5",
-    "@typescript-eslint/parser": "^5",
+    "@typescript-eslint/eslint-plugin": "^6",
+    "@typescript-eslint/parser": "^6",
     "ajv": "8.12.0",
-    "aws-cdk-lib": "2.80.0",
+    "aws-cdk-lib": "2.95.1",
     "constructs": "10.2.70",
     "esbuild": "^0.19.2",
     "eslint": "^8",
@@ -51,7 +52,7 @@
     "jsii-release": "^0.2.737",
     "npm-check-updates": "^16",
     "prettier": "^3.0.3",
-    "projen": "^0.71.158",
+    "projen": "^0.73.19",
     "standard-version": "^9",
     "ts-jest": "^27",
     "ts-node": "^10",
@@ -65,7 +66,7 @@
     "constructs": "^10.2.70"
   },
   "dependencies": {
-    "@time-loop/clickup-projen": "^0.0.161"
+    "@time-loop/clickup-projen": "^0.0.178"
   },
   "engines": {
     "node": ">= 14.18.0"

@@ -71,11 +71,6 @@ export interface SerializerProps {
   //readonly validator?: (contents: any) => boolean;
 }
 
-export interface ConstructProps {
-  readonly id: string;
-  readonly scope: Construct;
-}
-
 export interface GeneratorProps extends Omit<BucketDeploymentProps, 'sources'> {
   /**
    * The data to be marshalled.
@@ -133,30 +128,4 @@ export class Generator extends BucketDeployment {
       prune: props.prune ?? false,
     });
   }
-
-  /**
-   * Ensures the contents adhere to the schema, and the values adhere to
-   * validator specifications.
-   *
-   * @returns True if contents were successfully validated
-   */
-  // private validateFileContents(contents: any, schema?: any): boolean {
-  //   if (!schema) return true;
-  //   console.log(`validateFileContents called for obj: ${JSON.stringify(contents, null, 2)}`);
-
-  //   let countValidated = 0;
-  //   const topLevelKeys = Object.keys(contents);
-  //   for (const key of topLevelKeys) {
-  //     if (typeof contents[key] === 'object') {
-  //       if (this.validateFileContents(contents[key], schema[key])) countValidated++;
-  //     } else {
-  //       console.log(`Contents val for key ${key}: ${contents[key]}`);
-  //       console.log(`Schema val for key ${key}: ${schema[key]}`);
-  //       if (typeof contents[key] === typeof schema[key]) {
-  //         countValidated++;
-  //       }
-  //     }
-  //   }
-  //   return countValidated === topLevelKeys.length;
-  // }
 }

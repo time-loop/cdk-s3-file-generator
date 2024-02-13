@@ -3,26 +3,36 @@ import { Match, Template } from 'aws-cdk-lib/assertions';
 import { Role, ServicePrincipal } from 'aws-cdk-lib/aws-iam';
 import { Bucket } from 'aws-cdk-lib/aws-s3';
 import { schema } from './resources/test.schema';
-import { Generator, GeneratorFileType, GeneratorProps } from '../src';
+import { FileProps, Generator, GeneratorProps } from '../src';
 
 describe('Generator', () => {
   let app: App;
   let stack: Stack;
-  let props: Omit<GeneratorProps, 'contents'>;
+  // Helper interface for testing
+  interface GeneratorPropsNoFiles extends Omit<GeneratorProps, 'files'> {}
+  // Helper interface to remove contents from FileProps to inject later in the testing below
+  interface FilePropsNoContents extends Omit<FileProps, 'contents'> {}
+
+  let props: GeneratorPropsNoFiles;
+  const defaultFilesProps: FilePropsNoContents = {
+    fileName: 'test.json',
+    serializer: {
+      schema,
+    },
+  };
 
   const setupStack = () => {
     app = new App();
     stack = new Stack(app, 'TestStack');
     const bucket = Bucket.fromBucketArn(stack, 'TestBucket', 'arn:aws:s3:1232387877:testArn:test-clickup-bucket');
     props = {
-      fileType: GeneratorFileType.JSON,
       destinationBucket: bucket,
       destinationKeyPrefix: 'topLevelFolder',
-      fileName: 'test.json',
-      serializer: {
-        schema,
-      },
     };
+  };
+
+  const getGeneratorProps = (noFileProps: GeneratorPropsNoFiles, contents: any): GeneratorProps => {
+    return { ...noFileProps, files: [{ ...defaultFilesProps, contents }] };
   };
   // test('generateFileContents', () => {
   //   expect(new Generator(app, 'test', props)['generateFileContents']()).toEqual(props.contents);
@@ -50,25 +60,26 @@ describe('Generator', () => {
 
     test.each(testCasesShouldSucceed)('validateFileContents succeeds properly', (testContents) => {
       setupStack();
-      const actualProps: GeneratorProps = { ...props, contents: testContents };
+      const actualProps: GeneratorProps = getGeneratorProps(props, testContents);
       expect(() => new Generator(stack, 'test', actualProps)).not.toThrow();
     });
 
     test.each(testCasesShouldFail)('validateFileContents fails properly', (testContents) => {
       setupStack();
-      const actualProps: GeneratorProps = { ...props, contents: testContents };
+      const actualProps: GeneratorProps = getGeneratorProps(props, testContents);
       expect(() => new Generator(stack, 'test', actualProps)).toThrow(
-        new RegExp('Failed validation of contents against schema.*'),
+        new RegExp(`Failed validation of ${defaultFilesProps.fileName} contents against schema.*`),
       );
     });
   });
 
   describe('uploadToS3', () => {
     beforeEach(setupStack);
-    const actualProps: GeneratorProps = {
-      ...props,
-      contents: { test: true, test1: false, testComplex: { foo: 'bar', arr: [1, 2] } },
-    };
+    const actualProps: GeneratorProps = getGeneratorProps(props, {
+      test: true,
+      test1: false,
+      testComplex: { foo: 'bar', arr: [1, 2] },
+    });
 
     it('creates resources', () => {
       new Generator(stack, 'Generator', actualProps);
@@ -77,6 +88,8 @@ describe('Generator', () => {
         DestinationBucketKeyPrefix: actualProps.destinationKeyPrefix,
         DestinationBucketName: actualProps.destinationBucket.bucketName,
         Prune: false,
+        // Validates a single asset is included in the Deployment
+        SourceObjectKeys: Match.arrayEquals([Match.stringLikeRegexp('.*.zip')]),
       });
     });
 
@@ -133,6 +146,33 @@ describe('Generator', () => {
       const roleId = stack.getLogicalId(testRole.node.defaultChild as CfnElement);
       template.hasResourceProperties('AWS::Lambda::Function', {
         Role: { 'Fn::GetAtt': [roleId, 'Arn'] },
+      });
+    });
+
+    it('supports upload of multiple sources', () => {
+      const generatorProps: GeneratorProps = {
+        ...actualProps,
+        files: [
+          ...actualProps.files,
+          {
+            ...defaultFilesProps,
+            fileName: 'test2.json',
+            contents: {
+              test: true,
+              test1: false,
+              testComplex: { foo: 'testingthisstringer', arr: [2] },
+            },
+          },
+        ],
+      };
+      new Generator(stack, 'Generator', generatorProps);
+      const template = Template.fromStack(stack);
+
+      const expectedZipFiles = generatorProps.files.map((_file) => '.*.zip');
+      template.hasResourceProperties('Custom::CDKBucketDeployment', {
+        // Validates there are a number of assets equal to the number of passed in files included in the Deployment.
+        // At the time of writing, that's two according to generatorProps.files.
+        SourceObjectKeys: Match.arrayWith(expectedZipFiles.map((expectedFile) => Match.stringLikeRegexp(expectedFile))),
       });
     });
   });

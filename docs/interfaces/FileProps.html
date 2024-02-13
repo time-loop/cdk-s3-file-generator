@@ -1,4 +1,4 @@
-<!DOCTYPE html><html class="default" lang="en"><head><meta charSet="utf-8"/><meta http-equiv="x-ua-compatible" content="IE=edge"/><title>SerializerProps | @time-loop/cdk-s3-file-generator</title><meta name="description" content="Documentation for @time-loop/cdk-s3-file-generator"/><meta name="viewport" content="width=device-width, initial-scale=1"/><link rel="stylesheet" href="../assets/style.css"/><link rel="stylesheet" href="../assets/highlight.css"/><script defer src="../assets/main.js"></script><script async src="../assets/search.js" id="tsd-search-script"></script><script async src="../assets/navigation.js" id="tsd-nav-script"></script></head><body><script>document.documentElement.dataset.theme = localStorage.getItem("tsd-theme") || "os"</script><header class="tsd-page-toolbar">
+<!DOCTYPE html><html class="default" lang="en"><head><meta charSet="utf-8"/><meta http-equiv="x-ua-compatible" content="IE=edge"/><title>FileProps | @time-loop/cdk-s3-file-generator</title><meta name="description" content="Documentation for @time-loop/cdk-s3-file-generator"/><meta name="viewport" content="width=device-width, initial-scale=1"/><link rel="stylesheet" href="../assets/style.css"/><link rel="stylesheet" href="../assets/highlight.css"/><script defer src="../assets/main.js"></script><script async src="../assets/search.js" id="tsd-search-script"></script><script async src="../assets/navigation.js" id="tsd-nav-script"></script></head><body><script>document.documentElement.dataset.theme = localStorage.getItem("tsd-theme") || "os"</script><header class="tsd-page-toolbar">
 <div class="tsd-toolbar-contents container">
 <div class="table-cell" id="tsd-search" data-base="..">
 <div class="field"><label for="tsd-search-field" class="tsd-widget tsd-toolbar-icon search no-caption"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><use href="#icon-search"></use></svg></label><input type="text" id="tsd-search-field" aria-label="Search"/></div>
@@ -13,12 +13,12 @@
 <div class="tsd-page-title">
 <ul class="tsd-breadcrumb">
 <li><a href="../index.html">@time-loop/cdk-s3-file-generator</a></li>
-<li><a href="SerializerProps.html">SerializerProps</a></li></ul>
-<h1>Interface SerializerProps</h1></div>
+<li><a href="FileProps.html">FileProps</a></li></ul>
+<h1>Interface FileProps</h1></div>
 <section class="tsd-panel tsd-hierarchy">
 <h4>Hierarchy</h4>
 <ul class="tsd-hierarchy">
-<li><span class="target">SerializerProps</span></li></ul></section>
+<li><span class="target">FileProps</span></li></ul></section>
 <section class="tsd-panel-group tsd-index-group">
 <section class="tsd-panel tsd-index-panel">
 <details class="tsd-index-content tsd-index-accordion" open><summary class="tsd-accordion-summary tsd-index-summary">
@@ -26,19 +26,34 @@
 <div class="tsd-accordion-details">
 <section class="tsd-index-section">
 <h3 class="tsd-index-heading">Properties</h3>
-<div class="tsd-index-list"><a href="SerializerProps.html#schema" class="tsd-index-link"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-1024"></use></svg><span>schema?</span></a>
+<div class="tsd-index-list"><a href="FileProps.html#contents" class="tsd-index-link"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-1024"></use></svg><span>contents</span></a>
+<a href="FileProps.html#fileName" class="tsd-index-link"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-1024"></use></svg><span>file<wbr/>Name</span></a>
+<a href="FileProps.html#fileType" class="tsd-index-link"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-1024"></use></svg><span>file<wbr/>Type?</span></a>
+<a href="FileProps.html#serializer" class="tsd-index-link"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-1024"></use></svg><span>serializer?</span></a>
 </div></section></div></details></section></section>
 <section class="tsd-panel-group tsd-member-group">
 <h2>Properties</h2>
-<section class="tsd-panel tsd-member"><a id="schema" class="tsd-anchor"></a>
-<h3 class="tsd-anchor-link"><code class="tsd-tag ts-flagOptional">Optional</code> <code class="tsd-tag ts-flagReadonly">Readonly</code> <span>schema</span><a href="#schema" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
-<div class="tsd-signature"><span class="tsd-kind-property">schema</span><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type ">SchemaObject</span></div>
-<div class="tsd-comment tsd-typography"><p>Skeleton of final structure, i.e., definition of the output&#39;s structure.</p>
+<section class="tsd-panel tsd-member"><a id="contents" class="tsd-anchor"></a>
+<h3 class="tsd-anchor-link"><code class="tsd-tag ts-flagReadonly">Readonly</code> <span>contents</span><a href="#contents" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
+<div class="tsd-signature"><span class="tsd-kind-property">contents</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span></div>
+<div class="tsd-comment tsd-typography"><p>The data to be marshalled.</p>
 </div>
-<div class="tsd-comment tsd-typography">
-<h4>Default</h4><pre><code class="language-ts"><span class="hl-1">- </span><span class="hl-4">no</span><span class="hl-1"> </span><span class="hl-4">schema</span><span class="hl-1"> </span><span class="hl-4">defined</span><span class="hl-1">, </span><span class="hl-4">file</span><span class="hl-1"> </span><span class="hl-4">can</span><span class="hl-1"> </span><span class="hl-4">be</span><span class="hl-1"> </span><span class="hl-4">unstructured</span>
-</code><button>Copy</button></pre>
-</div></section></section></div>
+<div class="tsd-comment tsd-typography"></div></section>
+<section class="tsd-panel tsd-member"><a id="fileName" class="tsd-anchor"></a>
+<h3 class="tsd-anchor-link"><code class="tsd-tag ts-flagReadonly">Readonly</code> <span>file<wbr/>Name</span><a href="#fileName" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
+<div class="tsd-signature"><span class="tsd-kind-property">file<wbr/>Name</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+<div class="tsd-comment tsd-typography"><p>Name of the file, to be created in the path.</p>
+</div>
+<div class="tsd-comment tsd-typography"></div></section>
+<section class="tsd-panel tsd-member"><a id="fileType" class="tsd-anchor"></a>
+<h3 class="tsd-anchor-link"><code class="tsd-tag ts-flagOptional">Optional</code> <code class="tsd-tag ts-flagReadonly">Readonly</code> <span>file<wbr/>Type</span><a href="#fileType" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
+<div class="tsd-signature"><span class="tsd-kind-property">file<wbr/>Type</span><span class="tsd-signature-symbol">?:</span> <a href="../enums/GeneratorFileType.html#JSON" class="tsd-signature-type tsd-kind-enum-member">JSON</a></div></section>
+<section class="tsd-panel tsd-member"><a id="serializer" class="tsd-anchor"></a>
+<h3 class="tsd-anchor-link"><code class="tsd-tag ts-flagOptional">Optional</code> <code class="tsd-tag ts-flagReadonly">Readonly</code> <span>serializer</span><a href="#serializer" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
+<div class="tsd-signature"><span class="tsd-kind-property">serializer</span><span class="tsd-signature-symbol">?:</span> <a href="SerializerProps.html" class="tsd-signature-type tsd-kind-interface">SerializerProps</a></div>
+<div class="tsd-comment tsd-typography"><p>Optionally define how to serialize the final output.</p>
+</div>
+<div class="tsd-comment tsd-typography"></div></section></section></div>
 <div class="col-sidebar">
 <div class="page-menu">
 <div class="tsd-navigation settings">
@@ -58,15 +73,18 @@
 <h3><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><use href="#icon-chevronDown"></use></svg>On This Page</h3></summary>
 <div class="tsd-accordion-details">
 <ul>
-<li><a href="#schema" class=""><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-1024"></use></svg><span>schema</span></a></li></ul></div></details></div>
+<li><a href="#contents" class=""><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-1024"></use></svg><span>contents</span></a></li>
+<li><a href="#fileName" class=""><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-1024"></use></svg><span>file<wbr/>Name</span></a></li>
+<li><a href="#fileType" class=""><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-1024"></use></svg><span>file<wbr/>Type</span></a></li>
+<li><a href="#serializer" class=""><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-1024"></use></svg><span>serializer</span></a></li></ul></div></details></div>
 <div class="site-menu">
 <nav class="tsd-navigation"><a href="../index.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-1"></use></svg><span>@time-loop/cdk-s3-file-generator</span></a>
 <ul class="tsd-small-nested-navigation" id="tsd-nav-container" data-base="..">
 <li><a href="../enums/GeneratorFileType.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-8"></use></svg>GeneratorFileType</a></li>
 <li><a href="../classes/Generator.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-128"></use></svg>Generator</a></li>
-<li><a href="FileProps.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-256"></use></svg>FileProps</a></li>
+<li><a href="FileProps.html" class="current"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-256"></use></svg>FileProps</a></li>
 <li><a href="GeneratorProps.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-256"></use></svg>GeneratorProps</a></li>
-<li><a href="SerializerProps.html" class="current"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-256"></use></svg>SerializerProps</a></li>
+<li><a href="SerializerProps.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-256"></use></svg>SerializerProps</a></li>
 <li><a href="UploadProps.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-256"></use></svg>UploadProps</a></li></ul></nav></div></div></div>
 <div class="tsd-generator">
 <p>Generated using <a href="https://typedoc.org/" rel="noopener" target="_blank">TypeDoc</a></p></div>

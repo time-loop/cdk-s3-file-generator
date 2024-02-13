@@ -1,6 +1,4 @@
 import Ajv, { SchemaObject } from 'ajv';
-import { IRole } from 'aws-cdk-lib/aws-iam';
-import { IBucket } from 'aws-cdk-lib/aws-s3';
 import { BucketDeployment, BucketDeploymentProps, ISource, Source } from 'aws-cdk-lib/aws-s3-deployment';
 import { Construct } from 'constructs';
 
@@ -13,46 +11,6 @@ const ajv = new Ajv({ $data: true });
 export enum GeneratorFileType {
   JSON = 'generator_json',
   // TODO: YAML = 'generator_yaml',
-}
-
-export interface UploadProps {
-  /**
-   * Bucket where the file will be uploaded.
-   */
-  readonly bucket: IBucket;
-  /**
-   * The path in the bucket to which the file will be uploaded.
-   * @default - root of the bucket
-   */
-  readonly path?: string;
-  /**
-   * Name of the file, to be created in the path.
-   */
-  readonly fileName: string;
-  /**
-   * Whether or not to clear out the destination directory before uploading.
-   *
-   * @default false
-   */
-  readonly prune?: boolean;
-  /**
-   * Whether or not to delete the objects from the bucket when this resource
-   * is deleted/updated from the stack.
-   *
-   * NOTE: Changing the logical ID of the `BucketDeployment` construct, without changing the destination
-   * (for example due to refactoring, or intentional ID change) **will result in the deletion of the objects**.
-   * This is because CloudFormation will first create the new resource, which will have no affect,
-   * followed by a deletion of the old resource, which will cause a deletion of the objects,
-   * since the destination hasn't changed, and `retainOnDelete` is `false`.
-   *
-   * @default true
-   */
-  readonly retainOnDelete?: boolean;
-  /**
-   * Used as the Lambda Execution Role for the BucketDeployment.
-   * @default - role is created automatically by the Construct
-   */
-  readonly role?: IRole;
 }
 
 export interface SerializerProps {
